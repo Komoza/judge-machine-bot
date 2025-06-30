@@ -1,9 +1,10 @@
 {
-  "name": "untitled",
+  "name": "judje-machine",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
+    "start": "ts-node src/index.ts",
     "build": "tsc"
   },
   "dependencies": {
