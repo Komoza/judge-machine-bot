@@ -6,13 +6,13 @@ export const setupRegCommand = (bot: Telegraf) => {
     const user = ctx.message.from;
 
     if (user.is_bot) {
-      return ctx.reply('Ботов мы не регаем. Иди в жопу.');
+      return ctx.reply('Ботов мы не регаем. Иди в нахуй.');
     }
 
     const added = addUser(user);
 
     if (added) {
-      ctx.reply(`@${user.username || user.first_name} зарегистрирован. Ты в пуле, сучара.`);
+      ctx.reply(`@${user.username || user.first_name} зарегистрирован.`);
     } else {
       ctx.reply(`@${user.username || user.first_name} уже был в пуле. Не выпендривайся.`);
     }

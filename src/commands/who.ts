@@ -1,11 +1,14 @@
 import { Telegraf } from 'telegraf';
+import {loadUsers, saveUsers} from '../store/users';
+import { saveQuestion } from '../store/questions';
+import { ANSWERS } from '../utils/answers';
 import { getRandom } from '../utils/random';
-import {ANSWERS} from "../utils/answers";
-import {loadUsers} from "../store/users";
+import { TUser } from '../types/user';
 
 export const setupWhoCommand = (bot: Telegraf) => {
   bot.command('who', (ctx) => {
     const question = ctx.message.text.slice(4).trim();
+    const author = ctx.message.from as TUser;
 
     if (!question) {
       ctx.reply('Ты команду кинул, а вопрос где, дебил?');
@@ -14,8 +17,19 @@ export const setupWhoCommand = (bot: Telegraf) => {
 
     const users = loadUsers().filter((u) => !u.is_bot);
 
-    if (users.length === 0) {
-      ctx.reply('Никто ещё не зареган');
+    const alreadyRegistered = users.some((u) => u.id === author.id);
+
+    if (!alreadyRegistered) {
+      users.push(author);
+      saveUsers(users);
+
+      const displayName = author.username
+        ? `@${author.username}`
+        : `${author.first_name}${author.last_name ? ' ' + author.last_name : ''}`;
+
+      ctx.reply(`${displayName}, ага, задаёшь вопросы и не участвуешь? Хуй тебе, теперь участвуешь.`);
+      ctx.reply(`${displayName} зарегистрирован.`);
+
       return;
     }
 
@@ -24,8 +38,16 @@ export const setupWhoCommand = (bot: Telegraf) => {
     const displayName = chosen.username
       ? `@${chosen.username}`
       : `${chosen.first_name}${chosen.last_name ? ' ' + chosen.last_name : ''}`;
-    const result = phrase.replace('{user}', displayName);
 
-    ctx.reply(`${question}\n${result}`);
+    const answerText = phrase.replace('{user}', displayName);
+
+    ctx.reply(`"${question}"?\n${answerText}`).then(() => {
+      saveQuestion({
+        question,
+        author,
+        user: chosen,
+        timestamp: Date.now()
+      });
+    });
   });
 };

@@ -1,15 +1,10 @@
 import fs from 'fs';
 import path from 'path';
+import {TQuestion} from "../types/question";
 
-const filePath = path.resolve(__dirname, '../data/questions.json');
+const filePath = path.resolve(__dirname, '../../data/questions.json');
 
-export type StoredQuestion = {
-  question: string;
-  userId: number;
-  timestamp: number;
-};
-
-export function loadQuestions(): StoredQuestion[] {
+export function loadQuestions(): TQuestion[] {
   try {
     const raw = fs.readFileSync(filePath, 'utf-8');
     return JSON.parse(raw);
@@ -18,7 +13,7 @@ export function loadQuestions(): StoredQuestion[] {
   }
 }
 
-export function saveQuestion(entry: StoredQuestion) {
+export function saveQuestion(entry: TQuestion) {
   const all = loadQuestions();
   all.push(entry);
   fs.writeFileSync(filePath, JSON.stringify(all, null, 2), 'utf-8');
