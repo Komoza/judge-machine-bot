@@ -1,6 +1,6 @@
 import { Telegraf } from 'telegraf';
 import { getRandom } from '../utils/random';
-import {ANSWERS} from "../data/answers";
+import {ANSWERS} from "../utils/answers";
 import {loadUsers} from "../store/users";
 
 export const setupWhoCommand = (bot: Telegraf) => {
