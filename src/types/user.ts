@@ -1,7 +1,9 @@
 export type TUser = {
-  id: number;
-  username?: string;
-  first_name: string;
-  last_name?: string;
-  is_bot: boolean;
+  id: string;
+  username: string;
+  first_name?: string | null;
+  last_name?: string | null;
+  is_bot?: boolean;
+  language_code?: string | null;
+  is_premium?: boolean;
 };

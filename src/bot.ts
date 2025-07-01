@@ -9,7 +9,7 @@ dotenv.config();
 
 export const bot = new Telegraf(process.env.BOT_TOKEN!);
 
-setupWhoCommand(bot);
+// setupWhoCommand(bot);
 setupRegCommand(bot);
 setupHelpCommand(bot);
 setupPingCommand(bot);

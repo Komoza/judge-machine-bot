@@ -1,27 +1,25 @@
-import fs from 'fs';
-import path from 'path';
+import { eq } from 'drizzle-orm';
 import {TUser} from "../types/user";
+import {db, users} from "../db/client";
 
-const filePath = path.resolve(__dirname, '../../data/users.json');
-
-export function loadUsers(): TUser[] {
-  try {
-    const raw = fs.readFileSync(filePath, 'utf-8');
-    return JSON.parse(raw);
-  } catch {
-    return [];
-  }
+export function loadUsers(): Promise<TUser[]> {
+  return db.select().from(users);
 }
 
-export function saveUsers(users: TUser[]) {
-  fs.writeFileSync(filePath, JSON.stringify(users, null, 2), 'utf-8');
-}
+export async function saveUser(user: TUser): Promise<boolean> {
+  const exists = await db.select().from(users).where(eq(users.id, user.id)).limit(1);
 
-export function addUser(user: TUser): boolean {
-  const users = loadUsers();
-  if (users.some((u) => u.id === user.id)) return false;
+  if (exists.length > 0) return false;
 
-  users.push(user);
-  saveUsers(users);
+  await db.insert(users).values({
+    id: user.id,
+    username: user.username,
+    first_name: user.first_name,
+    last_name: user.last_name,
+    is_bot: user.is_bot,
+    language_code: user.language_code,
+    is_premium: user.is_premium,
+  });
+
   return true;
 }
