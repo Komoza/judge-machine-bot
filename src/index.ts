@@ -1,4 +1,4 @@
-import { bot } from './bot';
+import { bot } from "./bot";
 
 async function startBot() {
   await bot.telegram.setMyCommands(
@@ -10,7 +10,6 @@ async function startBot() {
     { scope: { type: 'default' } }
   );
   await bot.launch();
-  console.log('🤖 JudgeMachineBot работает...');
 }
 
 startBot().catch((err) => {
