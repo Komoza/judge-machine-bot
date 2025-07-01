@@ -1,4 +1,3 @@
-# Node.js
 node_modules/
 npm-debug.log*
 yarn-debug.log*
@@ -7,41 +6,33 @@ pnpm-debug.log*
 package-lock.json
 .pnpm-debug.log*
 
-# Build output
 dist/
 build/
 out/
 out-tsc/
 
-# TypeScript
 *.tsbuildinfo
 
-# Env files
 .env
 .env.*.local
 .env.local
 
-# IDEs and editors
 .vscode/
 .idea/
 *.sublime-workspace
 *.sublime-project
 
-# OS shit
 .DS_Store
 Thumbs.db
 
-# App-specific
 data/
 logs/
 tmp/
 .cache/
 .tmp/
 
-# JS compiled output (if you build to root)
 *.js
 *.js.map
 
-# Test coverage
 coverage/
 *.lcov
