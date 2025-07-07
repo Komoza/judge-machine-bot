@@ -1,6 +1,7 @@
-import { eq, and } from 'drizzle-orm';
-import { db } from '../db/client';
+import {eq, and, inArray} from 'drizzle-orm';
+import {db, users} from '../db/client';
 import { chatUsers } from '../db/schema';
+import {TUser} from "../types/user";
 
 export async function isUserInChat(userId: string, chatId: number): Promise<boolean> {
   const exists = await db
@@ -17,4 +18,20 @@ export async function saveChatUser(userId: string, chatId: number): Promise<void
     user_id: userId,
     chat_id: chatId,
   });
+}
+
+export async function getUsersByChat(chatId: number): Promise<TUser[]> {
+  const chatUserLinks = await db
+    .select({ userId: chatUsers.user_id })
+    .from(chatUsers)
+    .where(eq(chatUsers.chat_id, chatId));
+
+  if (!chatUserLinks.length) return [];
+
+  const userIds = chatUserLinks.map(link => link.userId);
+
+  return db
+    .select()
+    .from(users)
+    .where(inArray(users.id, userIds));
 }
