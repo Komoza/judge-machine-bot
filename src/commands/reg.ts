@@ -1,17 +1,21 @@
 import { Telegraf } from 'telegraf';
 import { saveUser } from '../store/users';
+import {isUserInChat, saveChatUser} from "../store/chat-user";
 
 export const setupRegCommand = (bot: Telegraf) => {
   bot.command('reg', async (ctx) => {
     const user = ctx.message.from;
+    const chatId = ctx.chat.id;
 
     if (user.is_bot) {
       return ctx.reply('Ботов мы не регаем. Иди в нахуй.');
     }
 
     try {
-      const added = await saveUser({
-        id: user.id.toString(), // вот тут фикс
+      const userId = user.id.toString();
+
+      await saveUser({
+        id: userId,
         username: user.username ?? '',
         first_name: user.first_name ?? '',
         last_name: user.last_name ?? null,
@@ -20,14 +24,17 @@ export const setupRegCommand = (bot: Telegraf) => {
         is_premium: user.is_premium ?? false,
       });
 
-      if (added) {
-        ctx.reply(`@${user.username || user.first_name} зарегистрирован.`);
-      } else {
-        ctx.reply(`@${user.username || user.first_name} уже был в пуле. Не выпендривайся.`);
+      const alreadyRegistered = await isUserInChat(userId, chatId);
+
+      if (alreadyRegistered) {
+        return ctx.reply(`@${user.username || user.first_name} уже зареган. Не выпендривайся`);
       }
+
+      await saveChatUser(userId, chatId);
+      await ctx.reply(`@${user.username || user.first_name} зарегистрирован.`);
+
     } catch (err) {
-      console.error('Ошибка при регистрации:', err);
-      ctx.reply('Чёт пошло по пизде. Попробуй позже.');
+      await ctx.reply('Чёт пошло по пизде. Попробуй позже.');
     }
   });
 };
