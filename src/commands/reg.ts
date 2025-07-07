@@ -32,7 +32,7 @@ export const setupRegCommand = (bot: Telegraf) => {
       }
 
       await saveChatUser(userId, chatId);
-      await ctx.reply(`${user.username || user.first_name} зарегистрирован.`);
+      await ctx.reply(`${getDisplayName(user)} зарегистрирован.`);
 
     } catch (err) {
       await ctx.reply('Чёт пошло по пизде. Попробуй позже.');
