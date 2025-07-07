@@ -4,6 +4,7 @@ import { setupRegCommand } from "./commands/reg";
 import {setupHelpCommand} from "./commands/help";
 import {setupPingCommand} from "./commands/ping";
 import {setupFutureCommand} from "./commands/future";
+import {setupPoolCommand} from "./commands/pool";
 
 dotenv.config();
 
@@ -13,3 +14,4 @@ setupRegCommand(bot);
 setupHelpCommand(bot);
 setupPingCommand(bot);
 setupFutureCommand(bot)
+setupPoolCommand(bot)
