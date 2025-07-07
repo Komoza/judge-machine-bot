@@ -5,6 +5,7 @@ async function startBot() {
     [
       { command: 'who', description: 'Задать вопрос и узнать жертву' },
       { command: 'reg', description: 'Зарегистрироваться' },
+      { command: 'future', description: 'Узнать будущее' },
       { command: 'help', description: 'Узнать о командах'}
     ],
     { scope: { type: 'default' } }
