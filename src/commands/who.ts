@@ -5,7 +5,9 @@ import {getUsersByChat} from "../store/chat-user";
 
 export const setupWhoCommand = (bot: Telegraf) => {
   bot.command('who', async (ctx) => {
-    const question = ctx.message.text.slice(4).trim();
+
+    const cleaned = ctx.message.text.replace(/@JudgeMachineBot/, '');
+    const question = cleaned.slice(4).trim();
     const chatId = ctx.chat?.id;
 
     if (!question) {
