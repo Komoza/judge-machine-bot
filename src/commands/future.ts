@@ -2,6 +2,7 @@ import { getRandom } from '../utils/random';
 import { Telegraf } from 'telegraf';
 import { PREDICTIONS } from '../utils/predictions';
 import {getUsersByChat} from "../store/chat-user";
+import {getDisplayName} from "../utils/get-display-name";
 
 export const setupFutureCommand = (bot: Telegraf) => {
   bot.command('future', async (ctx) => {
@@ -17,11 +18,8 @@ export const setupFutureCommand = (bot: Telegraf) => {
       }
 
       const randomUser = getRandom(others);
-      const displayName = randomUser.username
-        ? `@${randomUser.username}`
-        : `${randomUser.first_name}${randomUser.last_name ? ' ' + randomUser.last_name : ''}`;
 
-      const prediction = getRandom(PREDICTIONS).replace('${user}', displayName);
+      const prediction = getRandom(PREDICTIONS).replace('${user}', getDisplayName(randomUser));
 
       ctx.reply(prediction);
     } catch (err) {

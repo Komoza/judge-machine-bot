@@ -1,6 +1,7 @@
 import { Telegraf } from 'telegraf';
 import { saveUser } from '../store/users';
 import {isUserInChat, saveChatUser} from "../store/chat-user";
+import {getDisplayName} from "../utils/get-display-name";
 
 export const setupRegCommand = (bot: Telegraf) => {
   bot.command('reg', async (ctx) => {
@@ -27,11 +28,11 @@ export const setupRegCommand = (bot: Telegraf) => {
       const alreadyRegistered = await isUserInChat(userId, chatId);
 
       if (alreadyRegistered) {
-        return ctx.reply(`@${user.username || user.first_name} уже зареган. Не выпендривайся`);
+        return ctx.reply(`${getDisplayName(user)} уже зареган. Не выпендривайся`);
       }
 
       await saveChatUser(userId, chatId);
-      await ctx.reply(`@${user.username || user.first_name} зарегистрирован.`);
+      await ctx.reply(`${user.username || user.first_name} зарегистрирован.`);
 
     } catch (err) {
       await ctx.reply('Чёт пошло по пизде. Попробуй позже.');

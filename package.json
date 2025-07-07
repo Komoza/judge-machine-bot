@@ -18,6 +18,7 @@
     "@types/node": "^24.0.7",
     "@types/pg": "^8.15.4",
     "ts-node": "^10.9.2",
+    "typegram": "^5.2.0",
     "typescript": "^5.8.3"
   },
   "private": true

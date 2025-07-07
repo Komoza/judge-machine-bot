@@ -2,6 +2,7 @@ import { Telegraf } from 'telegraf';
 import { getRandom } from '../utils/random';
 import { ANSWERS } from '../utils/answers';
 import {getUsersByChat} from "../store/chat-user";
+import {getDisplayName} from "../utils/get-display-name";
 
 export const setupWhoCommand = (bot: Telegraf) => {
   bot.command('who', async (ctx) => {
@@ -30,11 +31,7 @@ export const setupWhoCommand = (bot: Telegraf) => {
     const chosen = getRandom(users);
     const phrase = getRandom(ANSWERS);
 
-    const displayName = chosen.username
-      ? `@${chosen.username}`
-      : `${chosen.first_name}${chosen.last_name ? ' ' + chosen.last_name : ''}`;
-
-    const answerText = phrase.replace('{user}', displayName);
+    const answerText = phrase.replace('{user}', getDisplayName(chosen));
 
     ctx.reply(`"${question}"?\n${answerText}`);
   });

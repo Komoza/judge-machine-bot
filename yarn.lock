@@ -664,6 +664,11 @@ ts-node@^10.9.2:
     v8-compile-cache-lib "^3.0.1"
     yn "3.1.1"
 
+typegram@^5.2.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/typegram/-/typegram-5.2.0.tgz#becf45510e54e719857a19de573d236435dc28dc"
+  integrity sha512-QubWrgT+tVPpM3/KkT/Rdd2zTYUwx96hePKBSio8pAWUD847M6W6akZppFs5BKfLtzuHBeTgjps528LJ+H1k+w==
+
 typescript@^5.8.3:
   version "5.8.3"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.8.3.tgz#92f8a3e5e3cf497356f4178c34cd65a7f5e8440e"

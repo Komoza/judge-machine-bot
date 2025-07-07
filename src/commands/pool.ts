@@ -22,11 +22,11 @@ export const setupPoolCommand = (bot: Telegraf) => {
       const list = result
         .map((row, i) => {
           const u = row.users;
-          return `${i + 1}. @${u.username || u.first_name}`;
+          return `${i + 1}. ${u.username || `${u.first_name} ${u.last_name ? u.last_name : ''}`}`;
         })
         .join('\n');
 
-      ctx.reply(`🧾 В пуле:\n${list}`);
+      ctx.reply(`В пуле:\n${list}`);
     } catch (err) {
       console.error('Ошибка в /pool:', err);
       ctx.reply('Что-то пошло по пизде. Я ничего не нашёл.');
