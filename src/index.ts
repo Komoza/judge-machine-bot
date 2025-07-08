@@ -7,6 +7,7 @@ async function startBot() {
       { command: 'reg', description: 'Зарегистрироваться' },
       { command: 'future', description: 'Узнать будущее' },
       { command: 'pool', description: 'Получить список игроков'},
+      { command: 'pidor', description: 'Узнать пидора дня' },
       { command: 'help', description: 'Узнать о командах'}
     ],
     { scope: { type: 'default' } }
