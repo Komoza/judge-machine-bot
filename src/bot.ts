@@ -7,6 +7,7 @@ import {setupFutureCommand} from "./commands/future";
 import {setupPoolCommand} from "./commands/pool";
 import {setupWhoCommand} from "./commands/who";
 import {setupPidorCommand} from "./commands/pidor";
+import {setupPidorStatCommand} from "./commands/pidorstat";
 
 dotenv.config();
 
@@ -18,4 +19,5 @@ setupHelpCommand(bot);
 setupPingCommand(bot);
 setupFutureCommand(bot);
 setupPidorCommand(bot);
+setupPidorStatCommand(bot)
 setupPoolCommand(bot);

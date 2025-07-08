@@ -8,6 +8,7 @@ async function startBot() {
       { command: 'future', description: 'Узнать будущее' },
       { command: 'pool', description: 'Получить список игроков'},
       { command: 'pidor', description: 'Узнать пидора дня' },
+      { command: 'pidorstat', description: 'Посмотреть статистику пидоров' },
       { command: 'help', description: 'Узнать о командах'}
     ],
     { scope: { type: 'default' } }
