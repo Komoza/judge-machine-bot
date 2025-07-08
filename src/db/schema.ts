@@ -1,4 +1,4 @@
-import { bigint, boolean, pgTable, text, varchar, primaryKey } from 'drizzle-orm/pg-core';
+import {bigint, boolean, pgTable, text, varchar, primaryKey, date} from 'drizzle-orm/pg-core';
 
 export const users = pgTable('users', {
   id: varchar('id', { length: 64 }).primaryKey(),
@@ -20,3 +20,10 @@ export const chatUsers = pgTable(
     primaryKey({ columns: [t.chat_id, t.user_id] }),
   ]
 );
+
+export const dailyPidor = pgTable('daily_pidor', {
+  chat_id: varchar('chat_id', { length: 64 }).notNull(),
+  pidor_id: varchar('pidor_id', { length: 64 }).notNull(),
+  author_id: varchar('author_id', { length: 64 }).notNull(),
+  date: date('date').notNull()
+});
