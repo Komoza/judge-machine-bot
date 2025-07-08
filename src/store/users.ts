@@ -23,3 +23,8 @@ export async function saveUser(user: TUser): Promise<boolean> {
 
   return true;
 }
+
+export async function getUserById(id: string): Promise<TUser | undefined> {
+  const result = await db.select().from(users).where(eq(users.id, id)).limit(1);
+  return result[0];
+}
