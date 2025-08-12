@@ -11,6 +11,8 @@ export const setupHelpCommand = (bot: Telegraf) => {
 /future — Узнать, как именно жизнь тебя выебет  
 /pidor — Узнать кто сегодня пидор дня
 /pidorstats — Узнать статистику пидоров
+/legend — Узнать кто сегодня легенда дня  
+/legendstats — Узнать статистику легенд  
 /help — Ну ты и нажал, поздравляю
     `.trim());
   });

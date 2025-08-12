@@ -9,6 +9,8 @@ async function startBot() {
       { command: 'pool', description: 'Получить список игроков'},
       { command: 'pidor', description: 'Узнать пидора дня' },
       { command: 'pidorstat', description: 'Посмотреть статистику пидоров' },
+      { command: 'legend', description: 'Узнать легенду дня' },
+      { command: 'legendstat', description: 'Посмотреть статистику легенд' },
       { command: 'help', description: 'Узнать о командах'}
     ],
     { scope: { type: 'default' } }

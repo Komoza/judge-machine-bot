@@ -27,3 +27,10 @@ export const dailyPidor = pgTable('daily_pidor', {
   author_id: varchar('author_id', { length: 64 }).notNull(),
   date: date('date').notNull()
 });
+
+export const dailyLegend = pgTable('daily_legend', {
+  chat_id: varchar('chat_id', { length: 64 }).notNull(),
+  legend_id: varchar('legend_id', { length: 64 }).notNull(),
+  author_id: varchar('author_id', { length: 64 }).notNull(),
+  date: date('date').notNull()
+});
