@@ -11,6 +11,7 @@ async function startBot() {
       { command: 'pidorstat', description: 'Посмотреть статистику пидоров' },
       { command: 'legend', description: 'Узнать легенду дня' },
       { command: 'legendstat', description: 'Посмотреть статистику легенд' },
+      { command: '8ball', description: 'Спросить шар: ответ да/нет' },
       { command: 'help', description: 'Узнать о командах'}
     ],
     { scope: { type: 'default' } }
