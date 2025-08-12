@@ -10,6 +10,7 @@ import {setupPidorCommand} from "./commands/pidor";
 import {setupPidorStatCommand} from "./commands/pidorstat";
 import {setupLegendCommand} from "./commands/legend";
 import {setupLegendStatCommand} from "./commands/legendstat";
+import {setupEightBallCommand} from "./commands/eightball";
 
 dotenv.config();
 
@@ -25,3 +26,4 @@ setupPidorStatCommand(bot)
 setupPoolCommand(bot);
 setupLegendCommand(bot);
 setupLegendStatCommand(bot);
+setupEightBallCommand(bot);
