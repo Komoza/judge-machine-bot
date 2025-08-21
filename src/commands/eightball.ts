@@ -21,7 +21,9 @@ export const setupEightBallCommand = (bot: Telegraf) => {
       const response = await fetch('https://yesno.wtf/api');
       const data = await response.json() as YesNoResponse;
       const answer = data.answer.toUpperCase();
-      await ctx.reply(`"${question}"?\n${answer}`);
+
+      await ctx.reply(`"${question}"?`);
+      await ctx.replyWithAnimation(data.image);
     } catch (error) {
       ctx.reply('Шар сломался, попробуй позже.');
     }
