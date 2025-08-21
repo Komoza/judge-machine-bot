@@ -1,6 +1,10 @@
 import { Telegraf } from 'telegraf';
-import { getRandom } from '../utils/random';
-import { EIGHTBALL_ANSWERS } from '../utils/eightball-answers';
+
+interface YesNoResponse {
+  answer: string;
+  forced: boolean;
+  image: string;
+}
 
 export const setupEightBallCommand = (bot: Telegraf) => {
   bot.command('8ball', async (ctx) => {
@@ -13,7 +17,13 @@ export const setupEightBallCommand = (bot: Telegraf) => {
       return;
     }
 
-    const answer = getRandom(EIGHTBALL_ANSWERS);
-    ctx.reply(`"${question}"?\n${answer}`);
+    try {
+      const response = await fetch('https://yesno.wtf/api');
+      const data = await response.json() as YesNoResponse;
+      const answer = data.answer.toUpperCase();
+      await ctx.reply(`"${question}"?\n${answer}`);
+    } catch (error) {
+      ctx.reply('Шар сломался, попробуй позже.');
+    }
   });
 };
