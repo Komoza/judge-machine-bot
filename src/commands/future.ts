@@ -3,11 +3,16 @@ import { Telegraf } from 'telegraf';
 import { PREDICTIONS } from '../utils/predictions';
 import {getUsersByChat} from "../store/chat-user";
 import {getDisplayName} from "../utils/get-display-name";
+import {BLOCKED_CHATS} from "../utils/blocked-chats";
 
 export const setupFutureCommand = (bot: Telegraf) => {
   bot.command('future', async (ctx) => {
     const chatId = ctx.chat.id;
     const authorId = ctx.from.id.toString();
+
+    if (BLOCKED_CHATS.includes(chatId)) {
+      return ctx.reply('В этой группе запрещено пользоваться этой командой');
+    }
 
     try {
       const users = await getUsersByChat(chatId);

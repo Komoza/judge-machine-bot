@@ -1,0 +1,1 @@
+export const BLOCKED_CHATS = [-1001737223457]
